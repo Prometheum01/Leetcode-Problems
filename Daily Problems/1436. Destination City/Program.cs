@@ -15,50 +15,73 @@ namespace Solution
 
         public string DestCity(IList<IList<string>> paths)
         {
+            //Brute Force
+            /*            for (int i = 0; i < paths.Count; i++)
+                        {
+                            string to = paths[i][1];
+
+                            string from = "";
+
+                            bool flag = false;
+
+                            for (int j = 0; j < i; j++)
+                            {
+                                from = paths[j][0];
+
+                                if (from == to)
+                                {
+                                    flag = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+                            }
+
+                            for (int j = i + 1; j < paths.Count; j++)
+                            {
+                                from = paths[j][0];
+
+                                if (from == to)
+                                {
+                                    flag = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+                            }
+
+                            if (!flag)
+                            {
+                                return to;
+                            }
+                        }
+                        return "";*/
+
+            HashSet<string> hashSetFrom = new HashSet<string>();
+
             for (int i = 0; i < paths.Count; i++)
             {
-                string to = paths[i][1];
+                string from = paths[i][0];
 
-                string from = "";
+                hashSetFrom.Add(from);
+            }
 
-                bool flag = false;
+            for (int i = 0; i < paths.Count; i++)
+            {
+                string from = paths[i][0];
 
-                for (int j = 0; j < i; j++)
+                if (!hashSetFrom.Contains(from))
                 {
-                    from = paths[j][0];
-
-                    if (from == to)
-                    {
-                        flag = true;
-                        break;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-
-                for (int j = i + 1; j < paths.Count; j++)
-                {
-                    from = paths[j][0];
-
-                    if (from == to)
-                    {
-                        flag = true;
-                        break;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-
-                if (!flag)
-                {
-                    return to;
+                    return from;
                 }
             }
+
             return "";
         }
+
     }
 }
